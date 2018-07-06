@@ -50,27 +50,29 @@ def convert_instance(data):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Reads json files with data and produces information in a convenient one line per question format.')
-    parser.add_argument('--keep_vars', help='Do not replace the varibales with values.', action='store_true')
+    parser.add_argument('--keep_vars', help='Do not replace the variables with values.', action='store_true')
     parser.add_argument('--tokenise_sql', help='Apply our tokenisation scheme to the SQL.', action='store_true')
     parser.add_argument('--query_split', help='Split based on queries, not questions.', action='store_true')
     parser.add_argument('--keep_sql_vars', help='Keep vars just in SQL.', action='store_true')
     parser.add_argument('--to_stdout', help='Print all data to stdout.', action='store_true')
     parser.add_argument('output_prefix', help='Filename prefix output_file for output files.')
+    parser.add_argument('input_filename', help='Input filename')
     args = parser.parse_args()
 
     out_train = open(args.output_prefix +'.train', 'w')
     out_dev = open(args.output_prefix +'.dev', 'w')
     out_test = open(args.output_prefix +'.test', 'w')
 
-    for line in sys.stdin:
-        filenames = line.strip().split()
-        for filename in filenames:
-            data = json.loads(open(filename).read())
-            if type(data) == list:
-                for instance in data:
-                    convert_instance(instance)
-            else:
-                convert_instance(data)
+    #for line in sys.stdin:
+    #    filenames = line.strip().split()
+    #for filename in filenames:
+    data = json.loads(open(args.input_filename).read())
+    #print(data[0]["sentences"])
+    if type(data) == list:
+        for instance in data:
+            convert_instance(instance)
+    else:
+        convert_instance(data)
 
     out_train.close()
     out_dev.close()
