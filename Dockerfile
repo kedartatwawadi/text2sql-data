@@ -28,6 +28,8 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends mercurial
 RUN pip install cython
 RUN BACKEND=cuda pip install git+https://github.com/clab/dynet#egg=dynet
+RUN apt-get -y install vim
+RUN pip install jupyter
 #RUN pip install --no-cache-dir http://download.pytorch.org/whl/cu80/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl
 
 # Required for viewing logged events

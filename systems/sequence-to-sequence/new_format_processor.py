@@ -73,7 +73,7 @@ def build_question_split(jsons, save_loc, keep_variables=False):
         print "\t%s: %d" % (k, len(v))
     save_datasets(datasets, save_loc)
 
-def build_nonredundant_query_split(jsons, save_loc, 
+def build_nonredundant_query_split(jsons, save_loc,
                                    max_questions=None, keep_variables=False):
     import random
     datasets = {}
